@@ -22,6 +22,8 @@
 
     <button @click="debugBtn">debug unity button</button>
     <button @click="sendMsgBtn('GameObject','TestFunc','hello unity')">send msg to unity</button>
+    <button @click="setMode(0)">Orbit</button>
+    <button @click="setMode(1)">Walk</button>
     <!-- <button @click="setMouseInput(0)">Disable Mouse</button> -->
     <!-- <button @click="setMouseInput(1)">Enable Mouse</button> -->
 </template>
@@ -59,10 +61,17 @@ export default {
         //   this.message("FirstPersonCamera","SetInputCap",val);
         //   this.message("GameObject","setPause",val);
         // },
+        setCamDistance(val){
+          this.message("OrbitCamera","SetCameraDistance",val);
+        },
 
+        setMode(val){
+          this.message("OrbitCamera","SetCameraMode",val);
+        },
+        
         setPause(val){
           console.log("hover " + val);
-          this.message("FirstPersonCamera","SetInputCap",val);
+          this.message("OrbitCamera","SetInputCap",val);
           this.message("GameObject","setPause",val);
         },
         message(gameObject, method, param) {

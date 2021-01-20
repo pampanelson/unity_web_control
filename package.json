@@ -1,5 +1,5 @@
 {
-  "name": "unity web control",
+  "name": "unity_web_control",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",

@@ -16,15 +16,17 @@
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">New Unity Project</div>
+        <div id="unity-build-title">TIM Demo</div>
       </div>
     </div>
 
-    <button @click="debugBtn">debug unity button</button>
-    <button @click="sendMsgBtn('GameObject','TestFunc','hello unity')">send msg to unity</button>
-    <button @click="setMode(0)">Orbit</button>
-    <button @click="setMode(1)">Walk</button>
-    <button @click="getCameraCurrentPosition()">Cam Target Position</button>
+    <!-- <button @click="debugBtn">debug unity button</button> -->
+    <!-- <button @click="sendMsgBtn('GameObject','TestFunc','hello unity')">send msg to unity</button> -->
+    <button @click="setMode(0)">轨道模式</button>
+    <br>
+    <br>
+    <button @click="setMode(1)">漫游模式[ W A S D 控制前后左右移动]</button>
+    <!-- <button @click="getCameraCurrentPosition()">Cam Target Position</button> -->
     <!-- <button @click="setMouseInput(0)">Disable Mouse</button> -->
     <!-- <button @click="setMouseInput(1)">Enable Mouse</button> -->
 </template>
@@ -97,7 +99,8 @@ export default {
 
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/test.loader.js";
-      var config = {
+
+      var notCompressedConfig = {
         dataUrl: buildUrl + "/test.data",
         frameworkUrl: buildUrl + "/test.framework.js",
         codeUrl: buildUrl + "/test.wasm",
@@ -106,6 +109,19 @@ export default {
         productName: "New Unity Project",
         productVersion: "0.1",
       };
+
+      // config for compressed
+      var compressedConfig = {
+        dataUrl: buildUrl + "/test.data.unityweb",
+        frameworkUrl: buildUrl + "/test.framework.js.unityweb",
+        codeUrl: buildUrl + "/test.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "New Unity Project",
+        productVersion: "0.1",
+      };
+
+      var config = notCompressedConfig;
 
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");

@@ -1,8 +1,8 @@
 <template>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas"
-        @mouseover="setPause(1)"
-        @mouseleave="setPause(0)" 
+        @mouseover="setPause(0)"
+        @mouseleave="setPause(1)" 
       ></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
@@ -24,6 +24,7 @@
     <button @click="sendMsgBtn('GameObject','TestFunc','hello unity')">send msg to unity</button>
     <button @click="setMode(0)">Orbit</button>
     <button @click="setMode(1)">Walk</button>
+    <button @click="getCameraCurrentPosition()">Cam Target Position</button>
     <!-- <button @click="setMouseInput(0)">Disable Mouse</button> -->
     <!-- <button @click="setMouseInput(1)">Enable Mouse</button> -->
 </template>
@@ -52,6 +53,10 @@ export default {
         //   console.log(info);
         // },
 
+        getCameraCurrentPosition(){
+            this.message("MyCamera","getCameraCurrentPosition","");
+        },
+
         sendMsgBtn(gameObject,method,param){
           this.message(gameObject,method,param);
           // console.log(gameObject);
@@ -62,17 +67,17 @@ export default {
         //   this.message("GameObject","setPause",val);
         // },
         setCamDistance(val){
-          this.message("OrbitCamera","SetCameraDistance",val);
+          this.message("MyCamera","SetCameraDistance",val);
         },
 
         setMode(val){
-          this.message("OrbitCamera","SetCameraMode",val);
+          this.message("MyCamera","SetCameraMode",val);
         },
         
         setPause(val){
           console.log("hover " + val);
-          this.message("OrbitCamera","SetInputCap",val);
-          this.message("GameObject","setPause",val);
+          this.message("MyCamera","SetCameraDisable",val);
+          // this.message("GameObject","setPause",val);
         },
         message(gameObject, method, param) {
             if (param === null) {

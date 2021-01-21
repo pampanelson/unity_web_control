@@ -8,14 +8,14 @@ public class CameraTarget : MonoBehaviour
     public CharacterController controller;
     protected enum CameraModeCode {Orbit,Walk};
     public float MoveSpeed = 1f;
-    OrbitCamera childCamera;
+    MyCameraControl childCamera;
     // Start is called before the first frame update
     void Start()
     {
         // get child ref
         controller = gameObject.GetComponentInChildren<CharacterController>();
         Debug.Log(controller);
-        childCamera = gameObject.GetComponentInChildren<OrbitCamera>();
+        childCamera = gameObject.GetComponentInChildren<MyCameraControl>();
         Debug.Log(childCamera);
         Debug.Log(childCamera._CameraMode);
     }

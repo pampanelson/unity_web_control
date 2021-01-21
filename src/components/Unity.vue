@@ -10,9 +10,9 @@
           <div id="unity-progress-bar-full"></div>
         </div>
       </div>
-      <div id="unity-mobile-warning">
+      <!-- <div id="unity-mobile-warning">
         WebGL builds are not supported on mobile devices.
-      </div>
+      </div> -->
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
@@ -22,10 +22,10 @@
 
     <!-- <button @click="debugBtn">debug unity button</button> -->
     <!-- <button @click="sendMsgBtn('GameObject','TestFunc','hello unity')">send msg to unity</button> -->
-    <button @click="setMode(0)">轨道模式</button>
+    <button @click="setMode(0)">轨道模式(鼠标拖动旋转,滚轮放大缩小)</button>
     <br>
     <br>
-    <button @click="setMode(1)">漫游模式[ W A S D 控制前后左右移动]</button>
+    <button @click="setMode(1)">漫游模式(鼠标拖动转向,W A S D 控制前后左右移动)</button>
     <!-- <button @click="getCameraCurrentPosition()">Cam Target Position</button> -->
     <!-- <button @click="setMouseInput(0)">Disable Mouse</button> -->
     <!-- <button @click="setMouseInput(1)">Enable Mouse</button> -->
@@ -117,11 +117,11 @@ export default {
         codeUrl: buildUrl + "/test.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
-        productName: "New Unity Project",
+        productName: "TIM Demo",
         productVersion: "0.1",
       };
 
-      var config = notCompressedConfig;
+      var config = compressedConfig;
 
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
@@ -164,5 +164,7 @@ export default {
 }
 </script>
 
-<style>
+
+<style scoped>
+@import "../assets/unity/style.css";
 </style>

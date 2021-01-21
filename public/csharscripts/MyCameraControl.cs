@@ -93,7 +93,14 @@ public class MyCameraControl : MonoBehaviour
         return this._CameraMode;
     }
 
+    void hideObj(string name){
+        GameObject.Find(name).GetComponent<MeshRenderer>().enabled = false;
+    }
 
+    void unHideObj(string name){
+        GameObject.Find(name).GetComponent<MeshRenderer>().enabled = true;
+
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -124,9 +131,13 @@ public class MyCameraControl : MonoBehaviour
 
             Debug.Log("Mouse Hold " + this._MousePressedTs);
 
+
+            hideObj("Cube1");
+
         }
         
         if (Input.GetMouseButtonUp(0)){
+            unHideObj("Cube1");
 
             this._bMouseHold = false;
             this._MouseReleasedTs = getMyTimestampInMil(DateTime.Now);

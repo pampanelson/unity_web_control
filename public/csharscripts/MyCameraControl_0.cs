@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 public class MyCameraControl : MonoBehaviour
 {
@@ -26,19 +25,8 @@ public class MyCameraControl : MonoBehaviour
     private bool _bMouseHold = false;
     private bool _bInputCap = true;
 
-    private long _MousePressedTs;
-    private long _MouseReleasedTs;
 
     // private Vector3 _CameraTargetPositionMark;
-
-
-    public static long getMyTimestampInMil(DateTime dateTimeToConvert) {
-        // According to Wikipedia, there are 10,000,000 ticks in a second, and Now.Ticks is the span since 1/1/0001. 
-        long NumSeconds= dateTimeToConvert.Ticks / 10000000;
-        long NumMillisencods = dateTimeToConvert.Ticks / 10000;
-        // return NumSeconds;
-        return NumMillisencods;
-    }
 
 
     Vector3 getCameraTargetPositionMark(string name){
@@ -92,74 +80,35 @@ public class MyCameraControl : MonoBehaviour
     int getCameraMode(){
         return this._CameraMode;
     }
-
-
     // Start is called before the first frame update
     void Start()
     {
         this._XForm_Camera = this.transform;
         this._XForm_Parent = this.transform.parent;
-        _CameraMode = (int)CameraModeCode.Orbit;
-        // _CameraMode = (int)CameraModeCode.Walk;
+        // _CameraMode = (int)CameraModeCode.Orbit;
+        _CameraMode = (int)CameraModeCode.Walk;
         Debug.Log("camera mode");
         Debug.Log(_CameraMode);
 
         Vector3 initCameraPosition = getCameraTargetPositionMark("CameraPositionMark1");
         setCameraTargetPosition(initCameraPosition);
 
-        // Debug.Log(Camera.main);
-        Debug.Log(getMyTimestampInMil(DateTime.Now));
     }
-
 
     void Update()
     {
-
-                
-        // Debug.Log(Time.deltaTime * 1000);
-
         if(Input.GetMouseButtonDown(0)){
             this._bMouseHold = true;
-            this._MousePressedTs = getMyTimestampInMil(DateTime.Now);
+            Debug.Log("Mouse Hold");
+        // }else{
 
-            Debug.Log("Mouse Hold " + this._MousePressedTs);
-
-        }
-        
-        if (Input.GetMouseButtonUp(0)){
+        } else if (Input.GetMouseButtonUp(0)){
 
             this._bMouseHold = false;
-            this._MouseReleasedTs = getMyTimestampInMil(DateTime.Now);
-
-
-            Debug.Log("Mouse Not Hold " + this._MouseReleasedTs);
-
-
-
-                   // distinguish click and drag by 300 milliseconds
-
-            if (this._MouseReleasedTs - this._MousePressedTs <= 300){ // if left button pressed...
-
-                // Debug.Log(this._MouseReleasedTs - this._MousePressedTs);
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit))
-                {
-                    // the object identified by hit.transform was clicked
-                    // do whatever you want
-                    Debug.Log("Clicked on gameobject: " +  hit.collider.name);
-
-                }
-            }
-
-
+            Debug.Log("Mouse Not Hold");
         }
 
- 
-
-   }
-
-
+    }
     // late Update is called once per frame after update()
     void LateUpdate()
     {
